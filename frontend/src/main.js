@@ -3,6 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import AtComponents from 'at-ui'
+import 'at-ui-style'
+import VueConstants from 'vue-constants'
+import VueResourse from 'vue-resource'
+
+Vue.use(VueConstants);
+Vue.use(AtComponents);
+Vue.use(VueResourse);
 
 Vue.config.productionTip = false
 
