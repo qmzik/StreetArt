@@ -31,7 +31,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/users/register', users);
+app.use('/user', users);
 
 app.use((req, res, next) => {
     const error = new Error("Not found");
