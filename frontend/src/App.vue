@@ -1,13 +1,14 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <Registration></Registration>
   </div>
 </template>
 
 <script>
+import Registration from "./components/Registration";
 export default {
-  name: 'App'
+  name: 'App',
+  components: {Registration},
 }
 </script>
 
