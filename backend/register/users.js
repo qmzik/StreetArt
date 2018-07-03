@@ -1,17 +1,26 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const UsersRegister = require('./../models/usersRegister');
+
+const User = require('./../models/user');
 
 
 app.post ('/', (req, res, next) =>{
-    const usersRegister = new UsersRegister({
+  User.find({ email: req.body.email })
+  .exec()
+  .then(user => {
+    if (user.length >= 1) {
+      return res.status(409).json({
+        message: "Mail exists"
+      });
+    } else {  
+  const user = new User({
         name: req.body.name,
         surname: req.body.surname,
         email: req.body.email,
         passwh: req.body.passwh
     });
-    usersRegister
+    user
       .save()
       .then(result => {
         console.log(result);
@@ -25,15 +34,17 @@ app.post ('/', (req, res, next) =>{
           error: err
         });
       });
+    }
+  });
 });
 
 
-/* app.get ('/checker', (req, res, next)=>{
-    UsersRegister.findById('5b38e0db40549486ed')
+app.get ('/checker', (req, res, next)=>{
+    User.find({email: 'dasdas@gmail.com'})
     .exec()
     .then(res => console.log(res))
     .catch(err => {
         console.log(err);
     });
-}); */
+}); 
 module.exports = app;

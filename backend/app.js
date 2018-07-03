@@ -5,10 +5,12 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 mongoose.connect(
-    "mongodb://node-shop:" +
+    "mongodb://josephen:" +
     process.env.MONGO_ATLAS_PW +
-    "@cluster0-shard-00-00-xmdaf.mongodb.net:27017,cluster0-shard-00-01-xmdaf.mongodb.net:27017,cluster0-shard-00-02-xmdaf.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true"
+    "@startup-site-shard-00-00-qwaqu.mongodb.net:27017,startup-site-shard-00-01-qwaqu.mongodb.net:27017,startup-site-shard-00-02-qwaqu.mongodb.net:27017/test?ssl=true&replicaSet=startup-site-shard-0&authSource=admin"
 );
+mongoose.Promise = global.Promise;
+
 
 const users = require('./register/users');
 
