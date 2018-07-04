@@ -1,28 +1,20 @@
 <template>
   <div class="row registration">
     <form class="col-xs-8 col-md-8 flex-center col-xs-offset-10 col-md-offset-10">
-      <div class="row input-field">
-        <label class="col-md-24 col-xs-24">Имя</label>
-        <AtInput v-model="firstName" class="col-xs-15 col-md-15" placeholder="Иван"/>
-        <HelpIcon class="helpIcon" :empty="!firstName" :correct="isFirstNameCorrect" :incorrect="!isFirstNameCorrect" hint="Пример: Иван"/>
-      </div>
-      <div class="row input-field">
-        <label class="col-md-24 col-xs-24">Фамилия</label>
-        <AtInput v-model="secondName" class="col-xs-15 col-md-15" placeholder="Иванов"/>
-        <HelpIcon class="helpIcon" :empty="!secondName" :correct="isSecondNameCorrect" :incorrect="!isSecondNameCorrect" hint="Пример: Иванов"/>
-      </div>
-      <div class="row input-field">
-        <label class="col-md-24 col-xs-24">E-mail</label>
-        <AtInput v-model="email" class="col-xs-15 col-md-15" placeholder="E-mail"/>
-        <HelpIcon class="helpIcon" :empty="!email" :correct="isEmailValid" :incorrect="!isEmailValid" hint="Пример: example@gmail.com"/>
-      </div>
-      <div class="row input-field">
-        <label class="col-md-24 col-xs-24">Пароль</label>
-        <AtInput type="password" v-model="password" class="col-xs-15 col-md-15" placeholder="Пароль"/>
-        <HelpIcon class="helpIcon" :empty="!password" :correct="isPasswordValid" :incorrect="!isPasswordValid" hint="Должен содержать более 8 символов, хотя бы одну строчную букву, одну прописную букву и одну цифру"/>
-      </div>
-      <div class="row input-field">
-        <label class="col-xs-19 col-md-19">Я прочитал и согласен со всеми правилами</label>
+      <InputLine class="input-field" v-model="firstName" :is-user-text-correct="isFirstNameCorrect" hint="Пример: Иван">
+        Имя
+      </InputLine>
+      <InputLine class="input-field" v-model="secondName" :is-user-text-correct="isSecondNameCorrect" hint="Пример: Иванов">
+        Фамилия
+      </InputLine>
+      <InputLine class="input-field" v-model="email" :is-user-text-correct="isEmailValid" hint="Пример: example@gmail.com">
+        E-mail
+      </InputLine>
+      <InputLine class="input-field" type="password" v-model="password" :is-user-text-correct="isPasswordValid" hint="Должен содержать более 8 символов, хотя бы одну строчную букву, одну прописную букву и одну цифру">
+        Пароль
+      </InputLine>
+      <div class="row input-field flex-start">
+        <label class="col-xs-15 col-md-15">Я прочитал и согласен со всеми правилами</label>
         <at-checkbox v-model="isUserAgreeWithRules" class="col-xs-2 col-md-2"></at-checkbox>
       </div>
       <div class="row flex-start">
@@ -38,10 +30,11 @@
     import { NAME_REGEXP, PASSWORD_REGEXP, EMAIL_REGEXP} from "../consts/regexps";
     import md5 from 'md5';
     import {API_ROUTE} from "../consts/apiRouts";
+    import InputLine from "./InputLine";
 
     export default {
         name: "Registration",
-      components: {HelpIcon},
+      components: {InputLine, HelpIcon},
       data() {
           return {
             firstName: '',
@@ -106,13 +99,5 @@
 <style scoped>
   .input-field {
     margin-top: 30px;
-  }
-  label {
-    text-align: left;
-    font-weight: bold;
-  }
-
-  .helpIcon {
-    margin-left: 10px;
   }
 </style>
