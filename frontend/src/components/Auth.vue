@@ -58,7 +58,7 @@
             title: 'Успех',
             message: 'Вы успешно авторизовались!'
           });
-          this.BackToMain();
+          this.$router.push({ name: 'Profile', params: { id: localStorage.userId }});
           }, () => {
           this.$Notify.error({
             title: 'Ошибка',
