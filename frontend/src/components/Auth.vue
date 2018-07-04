@@ -51,6 +51,9 @@
       SendData: function () {
         let data = { email: this.email, passwh: this.passwordHash };
         this.$http.post(API_ROUTE + 'user/signin', data).then(res => {
+          console.log(res);
+          localStorage.token = res.body.token;
+          localStorage.id = res.body.id;
           this.$Notify.success({
             title: 'Успех',
             message: 'Вы успешно авторизовались!'
