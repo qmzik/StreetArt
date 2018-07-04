@@ -41,7 +41,6 @@
             secondName: '',
             email: '',
             password: '',
-            passwordHash: '',
             isUserAgreeWithRules: false
           }
       },
