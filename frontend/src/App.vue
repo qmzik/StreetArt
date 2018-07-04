@@ -6,9 +6,11 @@
 
 <script>
 import Registration from "./components/Registration";
+import Auth from "./components/Auth";
+
 export default {
   name: 'App',
-  components: {Registration},
+  components: {Registration, Auth},
 }
 </script>
 
