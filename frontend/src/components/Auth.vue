@@ -22,7 +22,7 @@
   import HelpIcon from "./HelpIcon";
   import { EMAIL_REGEXP, PASSWORD_REGEXP } from "../consts/regexps";
   import md5 from 'md5';
-  import {API_ROUTE} from "../consts/apiRouts";
+  import { USER_AUTH } from "../consts/apiRouts";
 
   export default {
     name: "Auth",
@@ -50,15 +50,16 @@
     methods: {
       SendData: function () {
         let data = { email: this.email, passwh: this.passwordHash };
-        this.$http.post(API_ROUTE + 'user/signin', data).then(res => {
+        this.$http.post(USER_AUTH, data).then(res => {
           console.log(res);
+          localStorage.clear();
           localStorage.token = res.body.token;
           localStorage.id = res.body.id;
           this.$Notify.success({
             title: 'Успех',
             message: 'Вы успешно авторизовались!'
           });
-          this.$router.push({ name: 'Profile', params: { id: localStorage.userId }});
+          this.$router.push({ name: 'Profile', params: { id: localStorage.id }});
           }, () => {
           this.$Notify.error({
             title: 'Ошибка',

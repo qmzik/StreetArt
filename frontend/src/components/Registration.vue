@@ -29,7 +29,7 @@
     import HelpIcon from "./HelpIcon";
     import { NAME_REGEXP, PASSWORD_REGEXP, EMAIL_REGEXP} from "../consts/regexps";
     import md5 from 'md5';
-    import {API_ROUTE} from "../consts/apiRouts";
+    import {API_ROUTE, USER_REGISTER} from "../consts/apiRouts";
     import InputLine from "./InputLine";
 
     export default {
@@ -67,15 +67,15 @@
       methods: {
         SendData: function () {
           let data = { firstName: this.firstName, secondName: this.secondName, email: this.email, passwh: this.passwordHash };
-          this.$http.post(API_ROUTE + 'user/signup', data).then(res => {
+          this.$http.post(USER_REGISTER, data).then(res => {
             this.$Notify.success({
-              title: "Успех",
+              title: 'Успех',
               message: 'Вы были успешно зарегистрированы!'
             });
             this.BackToMain();
             }, () => {
             this.$Notify.error({
-              title: "Ошибка",
+              title: 'Ошибка',
               message: 'Такой E-mail уже зарегистрирован',
             });
           });
