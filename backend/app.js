@@ -13,6 +13,7 @@ mongoose.Promise = global.Promise;
 
 
 const users = require('./register/users');
+const projects = require('./register/projects');
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -32,6 +33,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/user', users);
+app.use('/project', projects);
 
 app.use((req, res, next) => {
     const error = new Error("Not found");

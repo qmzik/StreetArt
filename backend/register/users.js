@@ -17,6 +17,7 @@ app.post ('/signup', (req, res, next) => {
         const user = new User({
         name: req.body.name,
         surname: req.body.surname,
+        username: req.body.username,
         email: req.body.email,
         passwh: req.body.passwh,
         token: null
