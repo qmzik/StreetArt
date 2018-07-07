@@ -7,6 +7,9 @@
       <InputLine class="input-field" v-model="secondName" :is-user-text-correct="isSecondNameCorrect" hint="Пример: Иванов">
         Фамилия
       </InputLine>
+      <InputLine class="input-field" v-model="username" :is-user-text-correct="isEmailValid" hint="Пример: user123">
+        Username
+      </InputLine>
       <InputLine class="input-field" v-model="email" :is-user-text-correct="isEmailValid" hint="Пример: example@gmail.com">
         E-mail
       </InputLine>
@@ -27,7 +30,7 @@
 
 <script>
     import HelpIcon from "./HelpIcon";
-    import { NAME_REGEXP, PASSWORD_REGEXP, EMAIL_REGEXP} from "../consts/regexps";
+    import { NAME_REGEXP, PASSWORD_REGEXP, EMAIL_REGEXP, USERNAME_REGEXP} from "../consts/regexps";
     import md5 from 'md5';
     import {API_ROUTE, USER_REGISTER} from "../consts/apiRouts";
     import InputLine from "./InputLine";
@@ -39,6 +42,7 @@
           return {
             firstName: '',
             secondName: '',
+            username: '',
             email: '',
             password: '',
             isUserAgreeWithRules: false
@@ -50,6 +54,9 @@
         },
         isSecondNameCorrect: function () {
           return NAME_REGEXP.test(this.secondName)
+        },
+        isUsernameCorrect: function () {
+          return USERNAME_REGEXP.test(this.username);
         },
         isEmailValid: function() {
           return EMAIL_REGEXP.test(this.email)
