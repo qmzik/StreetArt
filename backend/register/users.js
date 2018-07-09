@@ -82,22 +82,16 @@ app.post('/', (req, res, next) => {
 app.get('/:username', (req, res, next) => {
   const username = req.params.username;
   User.findOne(req.param.username)
-    .select('name surname username')
+    .select('name surname username token _id')
     .exec()
     .then(doc => {
       if (doc) {
-        res.status(200).json({
-            name: doc.name,
-            request: {
-                type: 'GET',
-                url: 'http://localhost:8000/'+username
-            }
-        });
+        res.send({ name: doc.name, surname: doc.surname, token: doc.token, _id: doc._id})
       } else {
         res
           .status(404)
           .json({ 
-            message: status.INTERNAL_SERVER_ERROR
+            message: status.NOT_FOUND
           });
       }
     })
