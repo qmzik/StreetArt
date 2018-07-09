@@ -82,11 +82,11 @@ app.post('/', (req, res, next) => {
 app.get('/:username', (req, res, next) => {
   const username = req.params.username;
   User.findOne(req.param.username)
-    .select('name surname username token _id')
+    .select('name surname username email projectId')
     .exec()
     .then(doc => {
       if (doc) {
-        res.send({ name: doc.name, surname: doc.surname, token: doc.token, _id: doc._id})
+        res.send({ name: doc.name, surname: doc.surname, email: doc.email, projectId: doc.projectId})
       } else {
         res
           .status(404)
