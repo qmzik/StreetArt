@@ -7,7 +7,7 @@
       <InputLine class="input-field" v-model="secondName" :is-user-text-correct="isSecondNameCorrect" hint="Пример: Иванов">
         Фамилия
       </InputLine>
-      <InputLine class="input-field" v-model="username" :is-user-text-correct="isEmailValid" hint="Пример: user123">
+      <InputLine class="input-field" v-model="username" :is-user-text-correct="isUsernameCorrect" hint="Пример: user123">
         Username
       </InputLine>
       <InputLine class="input-field" v-model="email" :is-user-text-correct="isEmailValid" hint="Пример: example@gmail.com">
@@ -65,7 +65,7 @@
           return this.password.length > 8 && PASSWORD_REGEXP.test(this.password);
         },
         isAllCorrect: function () {
-          return this.isPasswordValid && this.isEmailValid && this.isUserAgreeWithRules && this.isFirstNameCorrect && this.isSecondNameCorrect;
+          return this.isPasswordValid && this.isEmailValid && this.isUserAgreeWithRules && this.isFirstNameCorrect && this.isSecondNameCorrect && this.isUsernameCorrect;
         },
         passwordHash: function () {
           return md5(this.password);

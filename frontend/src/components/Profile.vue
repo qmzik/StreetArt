@@ -15,6 +15,7 @@ import { USER_INFO } from '../consts/apiRouts';
         }
       },
       mounted: function () {
+        console.log(this.$router.history.current.path)
         let data = { id: localStorage.id };
         this.$http.post(USER_INFO, data).then(res => {
           if(res.body.token === localStorage.token && res.body._id === localStorage.id) {
@@ -30,7 +31,7 @@ import { USER_INFO } from '../consts/apiRouts';
               message: 'Потеряна свзять с сервером',
             });
         });
-      }
+      },
     }
 </script>
 

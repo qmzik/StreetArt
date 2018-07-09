@@ -1,7 +1,7 @@
 <template>
   <div class="row input-field">
     <label class="col-md-24 col-xs-24"><slot></slot></label>
-    <AtInput :type="type" @input.native="handleInput" :value="userText" class="col-xs-15 col-md-15" placeholder="Иван"/>
+    <AtInput :type="type" @input.native="handleInput" :value="userText" class="col-xs-15 col-md-15" :placeholder="placeholder"/>
     <HelpIcon class="helpIcon" :empty="!userText" :correct="isUserTextCorrect" :incorrect="!isUserTextCorrect" :hint="hint"/>
   </div>
 </template>
@@ -23,6 +23,9 @@
           },
           userText: {
             type: String,
+          },
+          placeholder: {
+            type: String
           },
           isUserTextCorrect: {
             type: Boolean,

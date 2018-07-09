@@ -68,7 +68,7 @@
         });
       },
       BackToMain: function () {
-        this.$router.push('Main')
+        this.$router.push('Main');
       }
     },
   }
