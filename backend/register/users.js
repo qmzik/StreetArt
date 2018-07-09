@@ -79,4 +79,32 @@ app.post('/', (req, res, next) => {
   })
 });
 
+app.get('/:username', (req, res, next) => {
+  const username = req.params.username;
+  User.findOne(req.param.username)
+    .select('name surname username')
+    .exec()
+    .then(doc => {
+      if (doc) {
+        res.status(200).json({
+            name: doc.name,
+            request: {
+                type: 'GET',
+                url: 'http://localhost:8000/'+username
+            }
+        });
+      } else {
+        res
+          .status(404)
+          .json({ 
+            message: status.INTERNAL_SERVER_ERROR
+          });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
+});
+
 module.exports = app;
