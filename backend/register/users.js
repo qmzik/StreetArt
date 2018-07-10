@@ -79,26 +79,32 @@ app.post('/', (req, res, next) => {
   })
 });
 
-app.get('/:username', (req, res, next) => {
-  const username = req.params.username;
-  User.findOne(req.param.username)
-    .select('name surname username email projectId')
-    .exec()
-    .then(doc => {
-      if (doc) {
-        res.send({ name: doc.name, surname: doc.surname, email: doc.email, projectId: doc.projectId})
-      } else {
-        res
-          .status(404)
-          .json({ 
-            message: status.NOT_FOUND
-          });
-      }
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ error: err });
-    });
+app.post('/status', (req, res, next) => {
+
 });
+
+app.get('/:username', (req,res,next) => {
+  User.findOne({ username: req.params.username }, (err, founded) => {
+    if(err) {
+      res.status(500).json({
+          message: status.INTERNAL_SERVER_ERROR
+      })
+    } else if (!founded) {
+      res.status(404).json({
+          message: status.DOES_NOT_EXIST
+      })
+    } else {
+      if(err) {
+          res.status(500).json({
+              message: status.INTERNAL_SERVER_ERROR
+          })
+      } else {
+          res.send({name: founded.name, surname: founded.surname, email: founded.email, projectId: founded.projectId});
+      } 
+    }
+  })
+});
+      
+      
 
 module.exports = app;
