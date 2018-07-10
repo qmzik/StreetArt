@@ -80,7 +80,29 @@ app.post('/', (req, res, next) => {
 });
 
 app.post('/status', (req, res, next) => {
-
+  User.findOne({ username: req.body.username }, (err, founded) => {
+    if(err) {
+      res.status(500).json({
+          message: status.INTERNAL_SERVER_ERROR
+      })
+    } else if (!founded) {
+      res.status(404).json({
+          message: status.DOES_NOT_EXIST
+      })
+    } else {
+      if(err) {
+          res.status(500).json({
+              message: status.INTERNAL_SERVER_ERROR
+          })
+      } else {
+        if (req.body.username == founded.username && req.body.token == founded.token && req.body._id == founded._id) {
+          res.send ({status: 'owner'})
+        } else {
+          res.send ({status: 'guest'})
+        }
+      } 
+    }
+  })
 });
 
 app.get('/:username', (req,res,next) => {
@@ -104,7 +126,5 @@ app.get('/:username', (req,res,next) => {
     }
   })
 });
-      
-      
 
 module.exports = app;
