@@ -20,7 +20,7 @@
 <script>
   import InputLine from './InputLine';
   import HelpIcon from "./HelpIcon";
-  import { EMAIL_REGEXP, PASSWORD_REGEXP } from "../consts/regexps";
+  import { USERNAME_REGEXP, PASSWORD_REGEXP } from "../consts/regexps";
   import md5 from 'md5';
   import { USER_AUTH } from "../consts/apiRouts";
 
@@ -34,14 +34,14 @@
       }
     },
     computed: {
-      isEmailValid: function () {
-        return EMAIL_REGEXP.test(this.email);
+      isUsernameCorrect: function () {
+        return USERNAME_REGEXP.test(this.username);
       },
       isPasswordValid: function () {
         return this.password.length > 8 && PASSWORD_REGEXP.test(this.password);
       },
       isAllCorrect: function () {
-        return this.isPasswordValid && this.isEmailValid;
+        return this.isPasswordValid && this.isUsernameCorrect;
       },
       passwordHash: function () {
         return md5(this.password)
@@ -49,7 +49,7 @@
     },
     methods: {
       SendData: function () {
-        let data = { email: this.email, passwh: this.passwordHash };
+        let data = { username: this.username, passwh: this.passwordHash };
         this.$http.post(USER_AUTH, data).then(res => {
           console.log(res);
           localStorage.clear();
@@ -59,7 +59,7 @@
             title: 'Успех',
             message: 'Вы успешно авторизовались!'
           });
-          this.$router.push({ name: 'Profile', params: { id: localStorage.id }});
+          this.GoToProifle(this.username);
           }, () => {
           this.$Notify.error({
             title: 'Ошибка',
@@ -67,8 +67,11 @@
           });
         });
       },
-      BackToMain: function () {
-        this.$router.push('Main');
+      GoToProifle: function (username) {
+        this.$router.push({ name: 'Profile', params: { username } });
+      },
+      BackToMain: function() {
+        this.$router.push({ name: 'Main' })
       }
     },
   }

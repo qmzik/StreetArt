@@ -88,7 +88,7 @@
           });
         },
         BackToMain: function() {
-          this.$router.push('Main')
+          this.$router.push({ name: 'Main' })
         }
       },
       watch: {

@@ -1,35 +1,29 @@
 <template>
-
-<div>PROFILE!</div>
+  <div class="container row">
+    <div class="col-md-10">LOL</div>
+    <div class="col-md-12">LOL</div>
+  </div>
 </template>
 
 <script>
-import { USER_INFO } from '../consts/apiRouts';
+import { USER_INFO, API_ROUTE } from '../consts/apiRouts';
     export default {
       name: "Profile",
       data() {
         return {
           userStatus: null,
           name: null,
-          surname: null
+          surname: null,
+          email: null
         }
       },
       mounted: function () {
-        console.log(this.$router.history.current.path)
-        let data = { id: localStorage.id };
-        this.$http.post(USER_INFO, data).then(res => {
-          if(res.body.token === localStorage.token && res.body._id === localStorage.id) {
-            this.userStatus = 'owner';
-          } else {
-            this.userStatus = 'guest';
-          }
+        let username = this.$router.history.current.path;
+        this.$http.get(API_ROUTE + 'user' + username).then(res => {
+          console.log(res);
           this.name = res.body.name;
           this.surname = res.body.surname;
-        }, () => {
-            this.$Notify.error({
-              title: 'Ошибка',
-              message: 'Потеряна свзять с сервером',
-            });
+          this.email = res.body.email;
         });
       },
     }
