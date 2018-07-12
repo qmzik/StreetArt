@@ -1,8 +1,8 @@
 <template>
   <div class="row auth">
     <form class="col-xs-8 col-md-8 flex-center col-xs-offset-10 col-md-offset-10">
-      <InputLine class="input-field" v-model="email" :is-user-text-correct="isEmailValid" hint="Пример: example@gmail.com">
-        E-mail
+      <InputLine class="input-field" v-model="username" :is-user-text-correct="isUsernameCorrect" hint="Пример: qmzik">
+        Username
       </InputLine>
       <InputLine class="input-field" type="password" v-model="password" :is-user-text-correct="isPasswordValid"
                  hint="Должен содержать более 8 символов, хотя бы одну строчную букву, одну прописную букву и одну цифру">
@@ -29,7 +29,7 @@
     components: {InputLine, HelpIcon},
     data() {
       return {
-        email: '',
+        username: '',
         password: '',
       }
     },
@@ -60,10 +60,11 @@
             message: 'Вы успешно авторизовались!'
           });
           this.GoToProifle(this.username);
-          }, () => {
+          }, (res) => {
+          console.log(res);
           this.$Notify.error({
             title: 'Ошибка',
-            message: 'Вы ввели неверный email или пароль'
+            message: 'Вы ввели неверный username или пароль'
           });
         });
       },
