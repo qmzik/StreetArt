@@ -1,7 +1,35 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const multer = require('multer');
 const TokenGenerator = require('uuid-token-generator');
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './uploads/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, new Date().toISOString() + file.originalname);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  // reject a file
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5
+  },
+  fileFilter: fileFilter
+});
+
 const status = require('../consts/status_messages');
 const User = require('./../models/user');
 
@@ -41,7 +69,7 @@ app.post ('/signup', (req, res, next) => {
 });
 
 app.post('/signin', (req,res,next) => {
-  User.findOne({ email: req.body.email }, (err, founded) => {
+  User.findOne({ username: req.body.username }, (err, founded) => {
     if(err) {
       res.status(500).json({
           message: status.INTERNAL_SERVER_ERROR
