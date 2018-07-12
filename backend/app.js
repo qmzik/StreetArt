@@ -16,6 +16,7 @@ const users = require('./register/users');
 const projects = require('./register/projects');
 
 app.use(morgan("dev"));
+app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
