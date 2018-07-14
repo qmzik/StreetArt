@@ -1,34 +1,14 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const multer = require('multer');
 const TokenGenerator = require('uuid-token-generator');
 
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, './uploads/');
-  },
-  filename: function(req, file, cb) {
-    cb(null, new Date().toISOString() + file.originalname);
-  }
-});
-
-const fileFilter = (req, file, cb) => {
-  // reject a file
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 5
-  },
-  fileFilter: fileFilter
-});
+app.post('/profileimage', (req, res, next) => {
+  console.log(req.files);
+  req.files.avatar.mv('./uploads/1.jpg', err => {
+    console.log(err);
+  })
+})
 
 const status = require('../consts/status_messages');
 const User = require('./../models/user');
