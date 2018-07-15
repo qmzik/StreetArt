@@ -154,7 +154,7 @@ app.get('/:username', (req,res,next) => {
               message: status.INTERNAL_SERVER_ERROR
           })
       } else {
-          res.send({name: founded.name, surname: founded.surname, email: founded.email, projectId: founded.projectId});
+          res.send({userAvatar: founded.userAvatar, name: founded.name, surname: founded.surname, email: founded.email, projectId: founded.projectId});
       } 
     }
   })
