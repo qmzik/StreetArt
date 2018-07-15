@@ -2,13 +2,38 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const TokenGenerator = require('uuid-token-generator');
+const fs = require('fs')
 
 app.post('/profileimage', (req, res, next) => {
-  console.log(req.files);
-  req.files.avatar.mv('./uploads/1.jpg', err => {
-    console.log(err);
+  User.findOne({ token: req.body.token }, (err, founded) => {
+    if(err) {
+      res.status(500).json({
+          message: status.INTERNAL_SERVER_ERROR
+      })
+    } else if (!founded) {
+      res.status(404).json({
+          message: status.DOES_NOT_EXIST
+      })
+    } else {
+      console.log(req.files)
+      req.files.userAvatar.mv('./uploads/3.jpg')
+      imgPath = './uploads/3.jpg'
+      founded.userAvatar.data = fs.readFileSync(imgPath)
+      founded.userAvatar.contentType = 'image/png'
+      console.log(founded.userAvatar)
+      founded.save((err, updated) => {
+      if(err) {
+          res.status(500).json({
+              message: status.INTERNAL_SERVER_ERROR
+          })
+      } else {
+        res.send({userAvatar: updated.userAvatar});
+      }
+      });
+    }
   })
-})
+});
+
 
 const status = require('../consts/status_messages');
 const User = require('./../models/user');

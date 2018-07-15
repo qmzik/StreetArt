@@ -21,7 +21,11 @@ const userSchema = mongoose.Schema({
     },  
     passwh: {
         type: String,
-        required: true,
+        required: true
+    },
+    userAvatar: {
+        contentType: String,
+        data: Buffer
     },
     token: String,
     projectId: Array
