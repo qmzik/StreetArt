@@ -73,7 +73,7 @@
       },
       methods: {
         SendData: function () {
-          let data = { firstName: this.firstName, secondName: this.secondName, email: this.email, username: this.username, passwh: this.passwordHash };
+          let data = { name: this.firstName, surname: this.secondName, email: this.email, username: this.username, passwh: this.passwordHash };
           this.$http.post(USER_REGISTER, data).then(res => {
             this.$Notify.success({
               title: 'Успех',

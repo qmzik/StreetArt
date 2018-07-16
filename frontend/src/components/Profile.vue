@@ -17,14 +17,24 @@ import { USER_INFO, API_ROUTE } from '../consts/apiRouts';
           email: null
         }
       },
-      mounted: function () {
-        let username = this.$router.history.current.path;
-        this.$http.get(API_ROUTE + 'user' + username).then(res => {
+      created: function() {
+        this.fetchUserInfo();
+      },
+      watch: {
+        '$route': function () {
+          this.fetchUserInfo();
+        }
+      },
+      methods: {
+        fetchUserInfo: function() {
+          let username = this.$router.history.current.path;
+          this.$http.get(API_ROUTE + 'user' + username).then(res => {
           console.log(res);
           this.name = res.body.name;
           this.surname = res.body.surname;
           this.email = res.body.email;
-        });
+          }, err => console.log(err));
+        }
       },
     }
 </script>
