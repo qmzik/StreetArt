@@ -29,7 +29,6 @@
 </template>
 
 <script>
-    import HelpIcon from "./HelpIcon";
     import { NAME_REGEXP, PASSWORD_REGEXP, EMAIL_REGEXP, USERNAME_REGEXP} from "../consts/regexps";
     import md5 from 'md5';
     import {API_ROUTE, USER_REGISTER} from "../consts/apiRouts";
@@ -37,7 +36,7 @@
 
     export default {
         name: "Registration",
-      components: {InputLine, HelpIcon},
+      components: { InputLine },
       data() {
           return {
             firstName: '',

@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Registration from '@/components/Registration'
 import Main from '@/components/Main'
 import Auth from '@/components/Auth'
-import Profile from '@/components/Profile'
+import Profile from '@/components/Profile/Profile'
 
 Vue.use(Router)
 
