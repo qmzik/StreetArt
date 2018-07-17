@@ -1,16 +1,21 @@
 <template>
     <div class="row">
-      <div class="photo col-md-6">
+      <div class="name col-md-24">
         <h2>{{ name }}</h2>
+      </div>
+      <div class="photo col-md-6">
         <img src='http://s4.hostingkartinok.com/uploads/images/2013/12/7f16668ee19e767ca297d66f36084d21.jpg' />
       </div>
       <div class="info col-md-12">
         <p class="specialization">{{ specialization }}</p>
         <p class="location"><i class="icon icon-map-pin"></i> Местоположение: {{ location }}</p>
-        <p class="site"><a href="#">{{ site_link }}</a></p>
+        <p class="site"><i class="icon icon-mail"></i> {{ email }}</p>
       </div>
       <div>
-        <at-button icon="icon-star" type="primary">В избранное</at-button>
+        <at-button v-if="userStatus==='owner'" icon="icon-edit-2" type="primary">Редактировать
+        </at-button>
+        <at-button v-if="userStatus==='guest'" icon="icon-star" type="primary">В избранное
+        </at-button>
         <at-button icon="icon-message-square">Написать сообщение</at-button>
       </div>
     </div>
@@ -33,7 +38,11 @@ export default {
       required: true,
       default: 'Местоположение не указано'
     },
-    site_link: {
+    email: {
+      type: String,
+      required: true
+    },
+    userStatus: {
       type: String,
       required: true
     }
@@ -43,13 +52,9 @@ export default {
 
 <style scoped>
   .info {
-    margin-top: 4em;
+    margin-top: 1em;
   }
   .info p {
-    text-align: left;
-  }
-  .photo h2 {
-    color: gray;
     text-align: left;
   }
   .photo img {
@@ -65,5 +70,8 @@ export default {
   }
   .site a:hover {
     color: #535353
+  }
+  .name {
+    text-align: left;
   }
 </style>
