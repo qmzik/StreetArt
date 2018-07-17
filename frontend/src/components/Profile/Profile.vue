@@ -1,6 +1,8 @@
 <template>
   <div class="row">
-    <UserInfo class="col-md-offset-2 col-md-10" />
+    <UserInfo class="col-md-offset-2 col-md-10" name="Низовцев Илья Эдуардович"
+              specialization="Blackbird Illustration"
+              location="Ekaterinburg" site_link="urfu.ru"/>
     <Gallery class="col-md-12" />
   </div>
 </template>
