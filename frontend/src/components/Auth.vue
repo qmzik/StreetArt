@@ -55,6 +55,7 @@
           localStorage.clear();
           localStorage.token = res.body.token;
           localStorage.id = res.body.id;
+          localStorage.username = this.username;
           this.$Notify.success({
             title: 'Успех',
             message: 'Вы успешно авторизовались!'

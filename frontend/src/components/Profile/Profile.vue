@@ -1,7 +1,7 @@
 <template>
   <div class="row">
-    <UserInfo class="col-md-offset-2 col-md-10" />
-    <Gallery class="col-md-12" />
+    <UserInfo class="col-md-offset-2 col-md-6" />
+    <Gallery :userStatus="userStatus" class="col-md-12" />
   </div>
 </template>
 

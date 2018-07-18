@@ -3,8 +3,8 @@
         <img class="col-md-24" src="https://mir-s3-cdn-cf.behance.net/projects/202/2f853b67666571.Y3JvcCwyMjE0LDE3MzEsMCw2MzU.jpg">
         <div class="row col-md-24 item-info">
             <h1 class="col-md-24 item-tittle">{{ title }}</h1>
-            <p class="col-md-24">{{ description }}</p>
-            <span class="col-md-24 flex-end">{{ date }}</span>
+            <div class="col-md-24 item-description">{{ normalizeDescription }}</div>
+            <span class="col-md-24 flex-end item-date">{{ date }}</span>
         </div>
     </div>
 </template>
@@ -19,11 +19,16 @@ export default {
         },
         description: {
             type: String,
-            default: 'Описание отсутствует'
+            default: 'Описание отсутствует',
         },
         date: {
             type: String,
             required: true
+        }
+    },
+    computed: {
+        normalizeDescription: function() {
+            return this.description.slice(0, 100);
         }
     }
 }
@@ -33,13 +38,28 @@ export default {
 
 
 .item {
-    box-shadow:8px 8px 15px 4px rgb(190, 176, 176);
+    box-shadow:10px 10px 15px 4px rgb(158, 154, 154);
     border-bottom: 1px rgb(190, 176, 176) solid;
+    width: 300px;
+    height: 400px;
+    transition: 0.5s;
+}
+
+.item:hover {
+    box-shadow: 15px 15px 15px 4px rgb(190, 176, 176);
 }
 
 .item-info {
     padding: 10px;
-    margin-top: 20px;
+    width: 100%;
 }
 
+.item-date, .item-description, .item-info {
+    margin-top: 15px;
+}
+
+.item-description {
+    width: 80%;
+    word-break: break-all;
+}
 </style>
