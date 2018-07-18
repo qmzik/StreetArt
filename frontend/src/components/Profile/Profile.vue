@@ -1,6 +1,9 @@
 <template>
   <div class="row">
-    <UserInfo class="col-md-offset-2 col-md-6" />
+    <UserInfo class="col-md-offset-2 col-md-10" v-bind:name="name + ' ' + surname"
+              specialization="Blackbird Illustration"
+              location="Ekaterinburg" v-bind:email="email"
+              v-bind:user-status="userStatus"/>
     <Gallery :userStatus="userStatus" class="col-md-12" />
   </div>
 </template>
