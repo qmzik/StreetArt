@@ -1,7 +1,7 @@
 <template>
     <div class="row user-info">
       <div class="row col-md-24 flex-middle">
-          <h1>{{ name }}</h1>
+        <a class="name" href="#">{{ name }}</a>
       </div>
       <div class="row col-md-5">
         <div class="photo">
@@ -57,6 +57,10 @@ export default {
 </script>
 
 <style scoped>
+  .name {
+    color: #2b2b2b;
+    font-size: 21px;
+  }
   .specialization {
     font-size: 14px;
     padding-bottom: 8px;
