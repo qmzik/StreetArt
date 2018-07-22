@@ -5,11 +5,13 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 
-mongoose.connect(
+/*mongoose.connect(
     "mongodb://josephen:" +
     process.env.MONGO_ATLAS_PW +
     "@startup-site-shard-00-00-qwaqu.mongodb.net:27017,startup-site-shard-00-01-qwaqu.mongodb.net:27017,startup-site-shard-00-02-qwaqu.mongodb.net:27017/test?ssl=true&replicaSet=startup-site-shard-0&authSource=admin"
-);
+);*/
+
+mongoose.connect('mongodb://localhost:27017/');
 mongoose.Promise = global.Promise;
 
 
