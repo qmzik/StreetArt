@@ -17,10 +17,10 @@ import UserInfo from './UserInfo';
     components: { Gallery, UserInfo },
     data() {
       return {
-        userStatus: null,
-        name: null,
-        surname: null,
-        email: null
+        userStatus: 'guest',
+        name: '',
+        surname: '',
+        email: ''
       }
     },
     created: function() {

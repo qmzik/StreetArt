@@ -1,6 +1,6 @@
 <template>
     <div class="row item">
-        <img class="col-md-24" src="https://mir-s3-cdn-cf.behance.net/projects/202/2f853b67666571.Y3JvcCwyMjE0LDE3MzEsMCw2MzU.jpg">
+        <img src="../../../assets/test.jpg">
         <div class="row col-md-24 item-info">
             <h1 class="col-md-24 item-tittle">{{ title }}</h1>
             <div class="col-md-24 item-description">{{ normalizeDescription }}</div>
@@ -40,9 +40,10 @@ export default {
 .item {
     box-shadow:10px 10px 15px 4px rgb(158, 154, 154);
     border-bottom: 1px rgb(190, 176, 176) solid;
-    width: 300px;
-    height: 400px;
+    width: 200px;
+    height: 300px;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 .item:hover {
